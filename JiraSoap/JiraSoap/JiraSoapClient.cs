@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace JiraSoapClient
+namespace JiraSoap
 {
     public class JSClient
     {
@@ -11,7 +11,7 @@ namespace JiraSoapClient
         {
             System.Diagnostics.Debug.WriteLine("Creating a test issue on http://jira/jira ...");
 
-            JiraSoapServiceService jiraSoapService = new JiraSoapServiceService();
+            JiraSoapService jiraSoapService = new JiraSoapService();
 
             string token = jiraSoapService.login(userName, userPass);
             string projectStr = projectCode;
