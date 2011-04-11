@@ -9,12 +9,26 @@ namespace JiraSoap
 {
 	public class JSClient
 	{
-
-		private string UserToken;
-		private string ProjectCode;
-		private RemoteProject Project;
-
-
+		
+		/**
+		 * create a copy of the service as a property
+		 * 
+		 * I create a private local property using an underscore to store the value so I only have to calc/create once
+		 * then I use the copy without an underscore for doing work
+		 */ 
+		private JiraSoapService _jiraSoapService;
+		private JiraSoapService jiraSoapService
+		{
+			get 
+			{
+				if (_jiraSoapService == new JiraSoapService())
+				{
+					_jiraSoapService = new JiraSoapService();			
+				}
+				return _jiraSoapService;
+			}
+		}
+		
 		/** IssueType List Property
 		 * 
 		 */
@@ -27,51 +41,50 @@ namespace JiraSoap
 				return _issueTypes;
 			}
 		}
+	
 		
+		/*
+		 * Components listed as part of the JIRA Project
+		 */ 
+		private List<RemoteComponent> _Components;
+		public List<RemoteComponent> Components
+		{
+			get{
+				if (_Components.Count == 0)
+				{
+					_Components = new List<RemoteComponent> (jiraSoapService.getComponents (UserToken, Project.key));
+				}
+				return _Components; 
+			}
 		
-		/** User property
-		 * 
-		 */
+		}
+				
+		/**
+		 * More properties - c# has implicit getters and setters
+		 */ 
+		private string UserToken;
+		private RemoteProject Project;
 		private RemoteUser JUser;
 
+		
+		/**
+		 * constructor
+		 */ 
 		public JSClient (string userName, string userPass, string projectCode)
-		{
+		{			
 			UserToken = jiraSoapService.login(userName, userPass);
 			Project = jiraSoapService.getProjectByKey (UserToken, projectCode);
 			JUser = jiraSoapService.getUser(UserToken, userName);
 		}
-
-		private JiraSoapService jiraSoapService = new JiraSoapService ();
-
-		/* public static void createTestMessage (string userName, string userPass, string projectCode)
-		{
-			System.Diagnostics.Debug.WriteLine ("Creating a test issue on http://jira/jira ...");
-			
-			
-			foreach (RemoteIssueType issueType in issueTypes) {
-				if (issueType.name.Equals ("Bug")) {
-					issue.type = issueType.id;
-				}
-			}
-			
-			List<RemoteComponent> components = new List<RemoteComponent> (jiraSoapService.getComponents (token, project.key));
-			foreach (RemoteComponent component in components) {
-				if (component.name.Equals ("MM - Strategies")) {
-					issue.components = new RemoteComponent[] { component };
-				}
-			}
-			
-			
-			;
-			System.Diagnostics.Debug.WriteLine ("Successfully created issue http://jira/jira/browse/" + returnedIssue.key);
-		} */
-
-		public RemoteIssue addNewIssue (string summary)
+		
+		public RemoteIssue addNewIssue(string summary, int IssueTypeID, RemoteComponent[] ComponentArray)
 		{
 			RemoteIssue issue = new RemoteIssue ();
 			issue.project = Project.key;
 			issue.reporter = JUser.name;
 			issue.summary = summary;
+			issue.type = issueTypes[IssueTypeID].name;
+			issue.components = ComponentArray;
 			
 			return jiraSoapService.createIssue (UserToken, issue);
 		}		
