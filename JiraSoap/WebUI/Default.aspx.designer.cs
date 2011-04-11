@@ -22,5 +22,7 @@ namespace WebUI {
 		protected System.Web.UI.WebControls.TextBox tbProjectCode;
 		
 		protected System.Web.UI.WebControls.Button button1;
+		
+		protected System.Web.UI.WebControls.Literal litTypes;
 	}
 }

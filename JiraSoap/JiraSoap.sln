@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraSoap", "JiraSoap\JiraSoap.csproj", "{D1338246-A518-4D7C-B974-3082C1B5B08F}"
 EndProject
-Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Packages", "Packages.mdproj", "{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}"
-EndProject
-Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Packages", "Packages.mdproj", "{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{0CC51F47-E1D2-495E-960A-4D858C2FAD81}"
 EndProject
 Global
@@ -19,10 +15,6 @@ Global
 		{0CC51F47-E1D2-495E-960A-4D858C2FAD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CC51F47-E1D2-495E-960A-4D858C2FAD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CC51F47-E1D2-495E-960A-4D858C2FAD81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B6AED7F-2A62-452C-AD34-E3B47897CF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1338246-A518-4D7C-B974-3082C1B5B08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1338246-A518-4D7C-B974-3082C1B5B08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1338246-A518-4D7C-B974-3082C1B5B08F}.Release|Any CPU.ActiveCfg = Release|Any CPU

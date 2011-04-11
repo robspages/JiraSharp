@@ -23,8 +23,13 @@
 				</li>								
 			</ul>
 		</fieldset>
-	
+
 		<asp:Button ID="button1" runat="server" Text="Create Test Issue" OnClick="button1_Clicked" />
+		
+		<asp:Literal runat="server" id="litTypes" />
+		
+		
+		
 	</form>
 </body>
 </html>

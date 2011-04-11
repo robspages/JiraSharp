@@ -11,6 +11,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using System.Text;
 using JiraSoap;
 
 
@@ -21,7 +22,18 @@ namespace WebUI
 
 		public virtual void button1_Clicked (object sender, EventArgs args)
 		{
-		 	JSClient.createTestMessage(tbUserName.Text, tbPassword.Text, tbProjectCode.Text);
+			JSClient js = new JSClient(tbUserName.Text, tbPassword.Text, tbProjectCode.Text);
+			
+			StringBuilder sb = new StringBuilder();
+			
+			foreach(RemoteIssueType rit in js.issueTypes)
+			{
+				sb.AppendLine(rit.name + ": " + rit.id.ToString()); 	
+			}
+			
+			litTypes.Text = sb.ToString();
+			
+		 	//JSClient.createTestMessage(tbUserName.Text, tbPassword.Text, tbProjectCode.Text);
 		}
 	}
 }
