@@ -252,7 +252,7 @@ public partial class JiraSoapService : System.Web.Services.Protocols.SoapHttpCli
     
     /// <remarks/>
     public JiraSoapService() {
-        this.Url = ConfigurationSettings.AppSettings["JiraURI"].ToString();
+        this.Url = "http://jira.tools.us.gspt.net/rpc/soap/jirasoapservice-v2"; //  ConfigurationSettings.AppSettings["JiraURI"].ToString();
     }
     
     /// <remarks/>

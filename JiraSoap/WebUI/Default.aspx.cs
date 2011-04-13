@@ -22,7 +22,8 @@ namespace WebUI
 
 		public virtual void button1_Clicked (object sender, EventArgs args)
 		{
-			JSClient js = new JSClient(tbUserName.Text, tbPassword.Text, tbProjectCode.Text);
+            JSClient js = new JSClient();
+			js.init(tbUserName.Text, tbPassword.Text, tbProjectCode.Text);
 			
 			StringBuilder sb = new StringBuilder();
 			
