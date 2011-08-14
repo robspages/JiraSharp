@@ -9,6 +9,19 @@ namespace JiraSoap
 
         private String UserToken = String.Empty;
         private JiraSoapService jiraSoapService = new JiraSoapService();
+        private List<RemoteIssue> _issues = new List<RemoteIssue>();
+        public List<RemoteIssue> Issues
+        {
+            get
+            {
+                return _issues;
+            }
+            set
+            {
+                _issues = value;
+            }
+        }
+
 
         public JiraSearch(String userToken) 
         { 
@@ -30,6 +43,12 @@ namespace JiraSoap
         public List<RemoteIssue> GetIssuesForProject(RemoteProject Project, int limit)
         {
             return searchIssues(Project, String.Format("project = \"{0}\"", Project.key), limit);
+        }
+
+        public List<RemoteIssue> GetIssuesForFilter(RemoteProject Project, String filterID)
+        {
+            RemoteIssue[] issuesArray = jiraSoapService.getIssuesFromFilter(UserToken, filterID);
+            return new List<RemoteIssue>(issuesArray);
         }
 
         public RemoteIssue searchIssues(RemoteProject Project, String searchTerm)

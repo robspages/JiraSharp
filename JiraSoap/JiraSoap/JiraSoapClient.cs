@@ -62,22 +62,9 @@ namespace JiraSoap
 
         }
 
-        // use sparringly 
-        private List<RemoteIssue> _Issues = new List<RemoteIssue>();
-        public List<RemoteIssue> Issues
-        {
-            get
-            {
-                if (_Issues.Count == 0)
-                {
-                        JiraSearch jql = new JiraSearch(UserToken);
-                        _Issues = jql.GetIssuesForProject(Project, 500);                
-                }
-                return _Issues;
-            }
-        }
+        public Hashtable CustomFields = new Hashtable();
 
-        /**
+       /**
          * More properties - c# has implicit getters and setters
          */
         private string UserToken = String.Empty;
@@ -119,10 +106,32 @@ namespace JiraSoap
             return jiraSoapService.createIssue(UserToken, issue);
         }
 
+        public List<RemoteIssue> getIssues()
+        {
+            JiraSearch jql = new JiraSearch(UserToken);
+            return jql.GetIssuesForProject(Project, 500);      
+        }
+
+        public List<RemoteIssue> getIssues(String filterID)
+        {
+            JiraSearch jql = new JiraSearch(UserToken);
+            return jql.GetIssuesForFilter(Project, filterID);
+        }
+
+        public void BuildCustomFieldsReference(RemoteIssue issue)
+        {
+            
+            CustomFields = new Hashtable();
+            foreach (RemoteCustomFieldValue field in issue.customFieldValues)
+            {
+                CustomFields.Add(field.customfieldId, field.values);
+            }
+        }
+
         /**
          * Params: UserToken, Remote Issue, List of RemoteFieldsValues - fields you updated
          */ 
-        public RemoteIssue updateIssue(String UserToken, RemoteIssue issue, RemoteFieldValue[] updatedFields)
+        public RemoteIssue updateIssue(RemoteIssue issue, RemoteFieldValue[] updatedFields)
         {
             return jiraSoapService.updateIssue(UserToken, issue.key, updatedFields);
         }
